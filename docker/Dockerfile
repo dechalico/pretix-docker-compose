@@ -1,7 +1,11 @@
-FROM ghcr.io/moritzlerch/pretix-manualseats as pretix_manualseats
+FROM pretix/standalone:stable as base
 
-FROM pretix/standalone:stable
+COPY ./plugins/pretix-manualseats /plugins/pretix_manualseats
 
-COPY --from=pretix_manualseats /pretix-manualseats /pretix-manualseats
+USER root
 
 RUN pip install -e /plugins/pretix_manualseats
+
+FROM base as runner
+
+USER pretixuser
