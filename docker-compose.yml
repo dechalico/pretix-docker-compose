@@ -1,8 +1,8 @@
-version: '3'
+version: "3"
 services:
   app:
     container_name: pretix_app
-    image: pretix/standalone:stable
+    build: ./docker
     restart: always
     depends_on:
       - database
